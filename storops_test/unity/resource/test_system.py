@@ -46,6 +46,7 @@ from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.metric import UnityMetricQueryResultList, \
     UnityMetricRealTimeQueryList
+from storops.unity.resource.move_session import UnityMoveSessionList
 from storops.unity.resource.nas_server import UnityNasServer, \
     UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
@@ -700,6 +701,13 @@ class UnitySystemTest(TestCase):
         capacities = unity.get_system_capacity()
         assert_that(capacities, instance_of(UnitySystemCapacityList))
         assert_that(len(capacities), equal_to(1))
+
+    @patch_rest
+    def test_get_move_session(self):
+        unity = t_unity()
+        move_sessions = unity.get_move_session()
+        assert_that(move_sessions, instance_of(UnityMoveSessionList))
+        assert_that(len(move_sessions), equal_to(1))
 
 
 class UnityDpeTest(TestCase):

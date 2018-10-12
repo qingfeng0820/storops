@@ -1883,3 +1883,29 @@ UnitySystemTierCapacity:
     - label: sizeFree
     - label: sizeTotal
     - label: sizeUsed
+
+
+UnityMoveSession:
+  data_src: rest
+  name: moveSession
+  properties:
+    - label: id
+      is_index: True
+    - label: sourceStorageResource
+      converter: UnityStorageResource
+    - label: sourceMemberLun
+      converter: UnityLun
+    - label: destinationPool
+      converter: UnityPool
+    - label: health
+      converter: UnityHealth
+    - label: progressPct
+    - label: currentTransferRate
+    - label: avgTransferRate
+    - label: estTimeRemaining
+    - label: state
+      converter: MoveSessionStateEnum
+    - label: status
+      converter: MoveSessionStatusEnum
+    - label: priority
+      converter: MoveSessionPriorityEnum

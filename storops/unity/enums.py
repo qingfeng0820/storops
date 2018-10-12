@@ -774,3 +774,29 @@ class InterfaceConfigModeEnum(UnityEnum):
     DISABLED = (0, "Disabled")
     STATIC = (1, "Static")
     AUTO = (2, "Auto")
+
+
+class MoveSessionStateEnum(UnityEnum):
+    INITIALIZING = (0, "Initializing")
+    QUEUED = (1, "Queued")
+    RUNNING = (2, "Running")
+    FAILED = (3, "Failed")
+    CANCELLING = (4, "Cancelling")
+    CANCELLED = (5, "Cancelled")
+    COMPLETED = (6, "Completed")
+
+
+class MoveSessionStatusEnum(UnityEnum):
+    INITIALIZING = (0, "OK")
+    POOL_OFFLINE = (1, "PoolOffline")
+    POOL_OUT_OF_SPACE = (2, "PoolOutOfSpace")
+    INTERNAL_ERROR = (3, "InternalError")
+
+
+class MoveSessionPriorityEnum(UnityEnum):
+    IDLE = (0, "Idle")
+    LOW = (1, "Low")
+    BELOW_NORMAL = (2, "Below_Normal")
+    NORMAL = (3, "Normal")
+    ABOVE_NORMAL = (4, "Above_Normal")
+    HIGH = (5, "High")

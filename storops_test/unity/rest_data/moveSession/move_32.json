@@ -1,0 +1,30 @@
+{
+  "content": {
+    "id": "move_32",
+    "state": 2,
+    "status": 0,
+    "priority": 5,
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "0"
+      ],
+      "descriptions": [
+        "The specified storage resource move session is operating normally."
+      ],
+      "resolutionIds": [
+        "0"
+      ]
+    },
+    "progressPct": 52,
+    "currentTransferRate": 2090,
+    "avgTransferRate": 1562,
+    "estTimeRemaining": "00:00:21.000",
+    "sourceStorageResource": {
+      "id": "sv_18"
+    },
+    "destinationPool": {
+      "id": "pool_5"
+    }
+  }
+}

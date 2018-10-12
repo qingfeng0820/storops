@@ -9,6 +9,10 @@
       "response": "pool_1.json"
     },
     {
+      "url": "/api/instances/pool/pool_5?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isAllFlash,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers,type",
+      "response": "pool_5.json"
+    },
+    {
       "url": "/api/types/pool/instances?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isAllFlash,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers,type",
       "response": "all.json"
     },

@@ -17,12 +17,17 @@ from __future__ import unicode_literals
 
 import logging
 
+import retryz
+
+import storops.unity.resource.move_session
 import storops.unity.resource.pool
 from storops.exception import UnityBaseHasThinCloneError, \
     UnityResourceNotFoundError, UnityCGMemberActionNotSupportError, \
-    UnityThinCloneNotAllowedError
+    UnityThinCloneNotAllowedError, UnityMigrationSourceHasThinCloneError, \
+    UnityMigrationTimeoutException
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
+from storops.unity import enums
 from storops.unity.client import UnityClient
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
     HostLUNAccessEnum, ThinCloneActionEnum, StorageResourceTypeEnum
@@ -352,6 +357,46 @@ class UnityLun(UnityResource):
 
         return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
                                    description)
+
+    def _is_move_session_supported(self, dest):
+        if self.is_thin_clone:
+            log.error('Not support move session, source lun is thin clone.')
+            return False
+        if self.is_data_reduction_enabled and not dest.is_all_flash:
+            log.error('Not support move session, source lun is compressed, '
+                      'but destination pool is not all flash pool.')
+            return False
+        return True
+
+    def migrate(self, dest, **kwargs):
+        if not self._is_move_session_supported(dest):
+            return False
+
+        interval = kwargs.pop('interval', 5)
+        timeout = kwargs.pop('timeout', 1800)
+
+        @retryz.retry(timeout=timeout, wait=interval,
+                      on_return=lambda x: not isinstance(x, bool))
+        def _do_check_move_session(move_session_id):
+            move_session = clz.get(self._cli, _id=move_session_id)
+            if move_session.state == enums.MoveSessionStateEnum.COMPLETED:
+                return True
+            if move_session.state in [enums.MoveSessionStateEnum.FAILED,
+                                      enums.MoveSessionStateEnum.CANCELLED]:
+                return False
+
+        clz = storops.unity.resource.move_session.UnityMoveSession
+        is_compressed = self.is_data_reduction_enabled
+
+        try:
+            move_session = clz.create(self._cli, self, dest,
+                                      is_data_reduction_applied=is_compressed)
+            return _do_check_move_session(move_session.id)
+        except UnityMigrationSourceHasThinCloneError:
+            log.error('Not support move session, source lun has thin clone.')
+            return False
+        except retryz.RetryTimeoutError:
+            raise UnityMigrationTimeoutException()
 
     # `__getstate__` and `__setstate__` are used by Pickle.
     def __getstate__(self):

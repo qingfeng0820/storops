@@ -1,0 +1,81 @@
+{
+  "content": {
+    "name": "moveSession",
+    "description": "Information about movesession.  <br/>  <br/>  A customer environment is often ever-changing, and as a result the ability to   deliver business continuity and flexibility is paramount. The new local LUN migration   feature address this concern, by adding the ability to move LUNs and Consistency Groups   between Pools on a system. Local LUN migration can be used to rebalance storage resources   across Pools when customer activity changes and an individual Pool's usage becomes oversaturated.   Another use case for local LUN migration is to provide LUNs with a destination when a Pool is   to be decommissioned. By leveraging Unity's Transparent Data Transfer (TDX) engine, host access   remains fully online during the migration session.",
+    "documentation": "https://10.245.101.39/apidocs/classes/moveSession.html",
+    "attributes": [
+      {
+        "name": "destinationPool",
+        "type": "pool",
+        "description": "Destination pool for the move.",
+        "displayValue": "destinationPool"
+      },
+      {
+        "name": "state",
+        "type": "MoveSessionStateEnum",
+        "description": "The current state of the session.  The session state represents the lifecycle of a session.",
+        "displayValue": "state"
+      },
+      {
+        "name": "currentTransferRate",
+        "type": "Integer",
+        "description": "The current transfer rate of the session in MB/sec.",
+        "displayValue": "currentTransferRate"
+      },
+      {
+        "name": "priority",
+        "type": "MoveSessionPriorityEnum",
+        "description": "The priority of this storageResource move relative to other moves.",
+        "displayValue": "priority"
+      },
+      {
+        "name": "progressPct",
+        "type": "Integer",
+        "description": "The progress of the session expressed as a percentage.",
+        "displayValue": "progressPct"
+      },
+      {
+        "name": "sourceStorageResource",
+        "type": "storageResource",
+        "description": "Storage resource to be moved.",
+        "displayValue": "sourceStorageResource"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the session.",
+        "displayValue": "id"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "The health of the session.",
+        "displayValue": "health"
+      },
+      {
+        "name": "sourceMemberLun",
+        "type": "lun",
+        "description": "The LUN being moved when the corresponding storageResource isn't specific enough, i.e. a Consistency Group member LUN or LUN VMFS Datastore.",
+        "displayValue": "sourceMemberLun"
+      },
+      {
+        "name": "avgTransferRate",
+        "type": "Integer",
+        "description": "The average transfer rate of the session in MB/sec.",
+        "displayValue": "avgTransferRate"
+      },
+      {
+        "name": "status",
+        "type": "MoveSessionStatusEnum",
+        "description": "The current session status of the TDX session.",
+        "displayValue": "status"
+      },
+      {
+        "name": "estTimeRemaining",
+        "type": "DateTime",
+        "description": "The estimated time remaining based on the current transfer rate.",
+        "displayValue": "estTimeRemaining"
+      }
+    ]
+  }
+}

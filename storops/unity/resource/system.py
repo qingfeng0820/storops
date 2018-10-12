@@ -36,6 +36,7 @@ from storops.unity.resource.host import UnityHost, UnityHostList, \
 from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.metric import UnityMetricRealTimeQuery
+from storops.unity.resource.move_session import UnityMoveSessionList
 from storops.unity.resource.nas_server import UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
@@ -419,6 +420,9 @@ class UnitySystem(UnitySingletonResource):
     def get_system_capacity(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(
             UnitySystemCapacityList, _id=_id, **filters)
+
+    def get_move_session(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityMoveSessionList, _id=_id, **filters)
 
     @property
     @instance_cache

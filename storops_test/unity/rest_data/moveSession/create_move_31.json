@@ -1,0 +1,13 @@
+{
+  "@base": "https://10.245.101.39/api/instances/moveSession",
+  "updated": "2018-10-09T07:29:22.182Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "/move_31"
+    }
+  ],
+  "content": {
+    "id": "move_31"
+  }
+}

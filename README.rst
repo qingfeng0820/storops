@@ -153,6 +153,7 @@ Feature List
         - list/create/delete iSCSI portals
         - list/create/delete link aggregations
         - list/create/delete Consistency Groups
+        - list/create/modify/cancel move sessions
         - list/create/delete metric real time query
         - list metrics query result
         - list disks
@@ -172,6 +173,7 @@ Feature List
         - Persist historical metric data to csv files
         - Upload license
         - enable/disable LUN data reduction
+        - LUN migration
     - supported metrics
         - system
             - read/write/total IOPS

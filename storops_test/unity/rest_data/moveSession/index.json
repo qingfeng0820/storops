@@ -1,0 +1,165 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/moveSession?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_27?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_27.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_28?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_28.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_29?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_29.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_30?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_30.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_31?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_31.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_32?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_32.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_33?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_33.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_34?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "move_34.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_31?compact=True&fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status",
+      "response": "error_has_thin_clones.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "destinationPool": {
+          "id": "pool_4"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "create_move_29.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": true,
+        "destinationPool": {
+          "id": "pool_5"
+        },
+        "sourceStorageResource": {
+          "id": "sv_18"
+        }
+      },
+      "response": "create_move_30.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "destinationPool": {
+          "id": "pool_6"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "error_has_thin_clones.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "destinationPool": {
+          "id": "pool_does_not_exist"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "error_source_dest_not_exists.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "destinationPool": {
+          "id": "pool_5"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "create_move_31.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": true,
+        "isDestThin": true,
+        "priority": 5,
+        "destinationPool": {
+          "id": "pool_5"
+        },
+        "sourceStorageResource": {
+          "id": "sv_18"
+        }
+      },
+      "response": "create_move_32.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "destinationPool": {
+          "id": "pool_7"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "create_move_33.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "destinationPool": {
+          "id": "pool_8"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "create_move_34.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_32/action/modify?compact=True",
+      "body": {
+        "priority": 4
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/moveSession/move_32/action/cancel?compact=True",
+      "response": "empty.json"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "@base": "https://10.245.101.39/api/types/moveSession/instances?fields=avgTransferRate,currentTransferRate,destinationPool,estTimeRemaining,health,id,priority,progressPct,sourceMemberLun,sourceStorageResource,state,status&per_page=2000&compact=true",
+  "updated": "2018-10-09T06:28:40.773Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "move_27",
+        "state": 6,
+        "status": 0,
+        "priority": 3,
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "0"
+          ],
+          "descriptions": [
+            "The specified storage resource move session is operating normally."
+          ],
+          "resolutionIds": [
+            "0"
+          ]
+        },
+        "progressPct": 100,
+        "currentTransferRate": 0,
+        "avgTransferRate": 5120,
+        "estTimeRemaining": "00:00:00.000",
+        "sourceStorageResource": {
+          "id": "sv_882"
+        },
+        "destinationPool": {
+          "id": "pool_3"
+        }
+      }
+    }
+  ]
+}

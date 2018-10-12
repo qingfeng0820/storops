@@ -26,7 +26,8 @@ from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError, \
     UnityThinCloneLimitExceededError, UnityCGMemberActionNotSupportError, \
-    UnityThinCloneNotAllowedError
+    UnityThinCloneNotAllowedError, UnityMigrationTimeoutException, \
+    UnityMigrationSourceDestNotExistsError
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
@@ -369,6 +370,69 @@ class UnityLunTest(TestCase):
         lun = UnityLun.get(cli=t_rest(), _id="sv_4")
         r = lun.update_hosts(host_names=["10.244.209.90"])
         assert_that(r, none())
+
+    @patch_rest
+    def test_migrate_lun_success(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_4', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(True))
+
+    @patch_rest
+    def test_migrate_compressed_lun_success(self):
+        lun = UnityLun('sv_18', cli=t_rest())
+        dest_pool = UnityPool('pool_5', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(True))
+
+    @patch_rest
+    def test_migrate_lun_source_is_thin_clone(self):
+        lun = UnityLun('sv_5606', cli=t_rest())
+        dest_pool = UnityPool('pool_4', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(False))
+
+    @patch_rest
+    def test_migrate_lun_source_compressed_dest_not_flash(self):
+        lun = UnityLun('sv_18', cli=t_rest())
+        dest_pool = UnityPool('pool_4', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(False))
+
+    @patch_rest
+    def test_migrate_lun_has_thin_clone(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_6', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(False))
+
+    @patch_rest
+    def test_migrate_lun_pool_does_not_exist(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_does_not_exist', cli=t_rest())
+        assert_that(calling(lun.migrate).with_args(dest_pool),
+                    raises(UnityMigrationSourceDestNotExistsError))
+
+    @patch_rest
+    def test_migrate_lun_failed(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_7', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(False))
+
+    @patch_rest
+    def test_migrate_lun_cancelled(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_8', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(False))
+
+    @patch_rest
+    def test_migrate_lun_timeout(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_5', cli=t_rest())
+        assert_that(calling(lun.migrate).with_args(dest_pool, timeout=10),
+                    raises(UnityMigrationTimeoutException))
 
 
 class UnityLunEnablePerfStatsTest(TestCase):

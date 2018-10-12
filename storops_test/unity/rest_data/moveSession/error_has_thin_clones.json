@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 151036720,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "The requested operation cannot be performed because the resource has Thin Clones. (Error Code:0x900a330)"
+      }
+    ],
+    "created": "2018-10-12T05:32:13.623Z"
+  }
+}

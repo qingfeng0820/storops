@@ -1322,3 +1322,29 @@ class UnityCGMemberActionNotSupportError(UnityException):
 
 class UnityThinCloneNotAllowedError(UnityException):
     message = 'Thinclone not support on thick luns or snaps of thick lun.'
+
+
+class UnityMigrationException(UnityException):
+    """Unity exceptions for Migration.
+
+    Any migration related exceptions should inherit this exception."""
+    pass
+
+
+@rest_exception
+class UnityMigrationSourceDestNotExistsError(UnityMigrationException):
+    error_code = 151036683
+
+
+@rest_exception
+class UnityMigrationSourceIsThinCloneError(UnityMigrationException):
+    error_code = 151036719
+
+
+@rest_exception
+class UnityMigrationSourceHasThinCloneError(UnityMigrationException):
+    error_code = 151036720
+
+
+class UnityMigrationTimeoutException(UnityMigrationException):
+    message = "Timeout when waiting for lun migration."
