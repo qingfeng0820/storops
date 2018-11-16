@@ -43,7 +43,9 @@ def _request_side_effect(method, url, **kwargs):
     response_map = {'right_url': MockResponse('OK', 200),
                     'right_url_json': MockResponse('{"id": "id_123"}', 200),
                     'bad_url': MockResponse('Failed', 404),
-                    'bad_url_raise': MockResponse('Failed', 401)}
+                    'bad_url_raise': MockResponse('Failed', 401),
+                    'service_unavailable':
+                        MockResponse('Service unavailable', 503)}
     return response_map[url]
 
 
@@ -160,6 +162,22 @@ class HTTPClientTest(unittest.TestCase):
 
         self.client.session.request.assert_called_with(
             'GET', 'bad_url_raise', auth=None, files=None,
+            verify=True, headers={}, data='{"k_abc": "v_abc"}')
+
+    @mock.patch('storops.connection.exceptions.from_response')
+    def test_request_when_service_unavailable(self, mocked_from_response):
+        self.client.session.request = mock.MagicMock(
+            side_effect=_request_side_effect)
+        mocked_from_response.return_value = storops_ex.HttpServerError()
+
+        def _tmp_func():
+            self.client.request('service_unavailable', 'GET',
+                                body='{"k_abc": "v_abc"}')
+        assert_that(calling(_tmp_func),
+                    raises(storops_ex.HttpServerError))
+
+        self.client.session.request.assert_called_with(
+            'GET', 'service_unavailable', auth=None, files=None,
             verify=True, headers={}, data='{"k_abc": "v_abc"}')
 
     @mock.patch(
